@@ -26,10 +26,11 @@ const processDirectoryRecursively = (currentPath) => {
     const isDirectory = fs.statSync(filePath).isDirectory();
     const isGitDirectory = path.basename(filePath) === '.git';
     const isNodeModulesDirectory = path.basename(filePath) === 'node_modules';
+    const fileExtension = path.extname(filePath);
 
     if (isDirectory && !isGitDirectory && !isNodeModulesDirectory) {
       processDirectoryRecursively(filePath);
-    } else if ((path.extname(filePath) === '.js' || path.extname(filePath) === '.ts') && !isNodeModulesDirectory) {
+    } else if ([".js", ".ts", ".tsx"].includes(fileExtension) && !isNodeModulesDirectory) {
       replaceImports(filePath);
     }
   });
@@ -80,3 +81,4 @@ const main = async () => {
 };
 
 main();
+
