@@ -56,7 +56,8 @@ const updatePackageScripts = (targetDirectory) => {
     const packageJson = require(packageJsonPath);
     packageJson.scripts = {
       "dev": "pages dev",
-      "prod": "pages prod"
+      "prod": "pages prod",
+      "build:local": "pages build"
     };
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.log('package.json scripts updated.');
