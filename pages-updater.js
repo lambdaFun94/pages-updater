@@ -8,7 +8,7 @@ const replacementText = '"@yext/sites-components"';
 // Function to install npm packages
 const installPackages = (targetDirectory) => {
   try {
-    execSync(`npm install @yext/pages@latest @yext/sites-components@latest --prefix ${targetDirectory}`, {
+    execSync(`npm install @yext/pages@latest @yext/sites-components@latest @vitejs/plugin-react@latest --prefix ${targetDirectory}`, {
       stdio: 'inherit',
     });
   } catch (error) {
