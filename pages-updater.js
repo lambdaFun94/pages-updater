@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 
 const pagesImportRegex = /"@yext\/pages\/components"/g;
 const replacementText = '"@yext/sites-components"';
+const markdownRegex = "Markdown.{1,10}from \"@yext\\/react-components";
 
 // Function to install npm packages
 const installPackages = (targetDirectory) => {
@@ -43,6 +44,11 @@ const replaceImports = (filePath) => {
     const modifiedContent = fileContent.replace(pagesImportRegex, replacementText);
     fs.writeFileSync(filePath, modifiedContent, 'utf8'); // Update the file content
     console.log(`Imports replaced in: ${filePath}`);
+    if (!!fileContent.match(markdownRegex)) {
+      console.log(`Legacy Markdown import from react-components detected in ${filePath}.` +
+       `\n Please update to use react-markdown. See https://hitchhikers.yext.com/docs/pages/rich-text-markdown`
+      );
+    }
   } catch (error) {
     console.error('Error processing file:', error.message);
   }
